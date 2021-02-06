@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.text.*?>
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane fx:id="ANCHOR" prefHeight="768.0" prefWidth="1024.0" style="-fx-background-color: #2c2f33;" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="me.moshe.alarmplus.ui.controllers.AlarmPlusMainController">
+   <children>
+      <Label fx:id="TITLE" alignment="CENTER" contentDisplay="CENTER" layoutX="348.0" layoutY="44.0" prefHeight="86.0" prefWidth="328.0" text="AlarmPlus" textAlignment="CENTER" textFill="WHITE">
+         <font>
+            <Font size="60.0" />
+         </font>
+      </Label>
+      <Label layoutX="357.0" layoutY="251.0" prefHeight="66.0" prefWidth="105.0" text="Hour" textFill="WHITE">
+         <font>
+            <Font size="45.0" />
+         </font>
+      </Label>
+      <Label layoutX="523.0" layoutY="251.0" prefHeight="66.0" prefWidth="146.0" text="Minute" textFill="WHITE">
+         <font>
+            <Font size="45.0" />
+         </font>
+      </Label>
+      <Label layoutX="371.0" layoutY="480.0" prefHeight="66.0" prefWidth="255.0" text="Alarm is set to" textFill="WHITE">
+         <font>
+            <Font size="39.0" />
+         </font>
+      </Label>
+      <Label layoutX="382.0" layoutY="546.0" prefHeight="113.0" prefWidth="255.0" textFill="WHITE" />
+      <ComboBox fx:id="HOURDROPDOWN" layoutX="348.0" layoutY="317.0" prefHeight="26.0" prefWidth="123.0" promptText="None" stylesheets="@../css/style.css" visibleRowCount="8" />
+      <ComboBox fx:id="MINUTEDROPDOWN" layoutX="531.0" layoutY="317.0" prefHeight="26.0" prefWidth="123.0" promptText="None" stylesheets="@../css/style.css" />
+      <Button id="SUBMIT" fx:id="setAlarm" layoutX="438.0" layoutY="399.0" mnemonicParsing="false" onAction="#setAlarm" prefHeight="57.0" prefWidth="123.0" stylesheets="@../css/style.css" text="Submit" textFill="#e4e4e4">
+         <font>
+            <Font size="27.0" />
+         </font>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </Button>
+      <Label fx:id="TIMESETMESSAGE" alignment="CENTER" layoutX="349.0" layoutY="546.0" prefHeight="66.0" prefWidth="299.0" textFill="#f48686">
+         <font>
+            <Font size="29.0" />
+         </font>
+      </Label>
+      <Label alignment="CENTER" layoutX="349.0" layoutY="603.0" prefHeight="88.0" prefWidth="299.0" text="Time until alarm" textFill="WHITE">
+         <font>
+            <Font size="39.0" />
+         </font>
+      </Label>
+      <Label fx:id="TIMEUNTILMESSAGE" alignment="CENTER" layoutX="316.0" layoutY="663.0" prefHeight="88.0" prefWidth="370.0" textFill="#f48686">
+         <font>
+            <Font size="29.0" />
+         </font>
+      </Label>
+   </children>
+</AnchorPane>

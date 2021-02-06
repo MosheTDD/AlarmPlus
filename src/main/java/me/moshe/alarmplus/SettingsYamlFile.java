@@ -1,4 +1,4 @@
-package me.moshe.lifeessentials;
+package me.moshe.alarmplus;
 
 import me.border.utilities.file.AbstractYamlFile;
 

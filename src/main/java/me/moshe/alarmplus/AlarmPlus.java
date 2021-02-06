@@ -1,7 +1,10 @@
-package me.moshe.lifeessentials.alarmplus;
+package me.moshe.alarmplus;
 
+import me.border.utilities.scheduler.Task;
 import me.border.utilities.scheduler.TaskBuilder;
-import me.moshe.lifeessentials.Main;
+import me.moshe.alarmplus.Main;
+import me.moshe.alarmplus.ui.controllers.AlarmPlusMainController;
+
 import javax.sound.sampled.*;
 import java.io.File;
 import java.io.IOException;
@@ -12,20 +15,19 @@ import java.util.Scanner;
 import java.util.TimerTask;
 import java.util.concurrent.TimeUnit;
 
-public class AlarmPlus extends Thread{
-    private Clip clip;
-    private boolean stop = false;
+public class AlarmPlus {
+    private static Clip clip;
+    private static boolean stop = false;
+    public static String timeSet;
+    public static String timeUntil;
+    public static Task task;
 
-    public void run(){
+    public static void start(){
         audioManager();
-        setDate(21, 39);
+        calculateTime(0, 0);
     }
 
-    private void setDate(int h, int m){//FIX
-        calculateTime(h, m);
-    }
-
-    private synchronized void audioManager() {
+    private static synchronized void audioManager() {
         try {
             AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(new File(Main.settings.getString("SuperAlarm.AudioFilePath")).getAbsoluteFile());
             clip = AudioSystem.getClip();
@@ -35,7 +37,7 @@ public class AlarmPlus extends Thread{
         }
     }
 
-    private void unlock(){
+    private static void unlock(){
         if(stop) {
             stop = false;
             return;
@@ -56,7 +58,7 @@ public class AlarmPlus extends Thread{
 
     }
 
-    private void calculateTime(int designatedHour, int designatedMinute){
+    public static void calculateTime(int designatedHour, int designatedMinute){
         LocalDateTime time = LocalDateTime.now();
         int year = time.getYear();
         Month month = time.getMonth();
@@ -80,10 +82,15 @@ public class AlarmPlus extends Thread{
         } else {
             then = LocalDateTime.of(year, month, dayOfMonth, designatedHour, designatedMinute);
         }
-        System.out.println(then);
+
+        timeSet = (then.getHour() + ":" + then.getMinute() + " " + then.getDayOfMonth()  + "." + then.getMonthValue() + "." + then.getYear());
+        timeUntil = (time.until(then, ChronoUnit.HOURS) + " hours and " + time.until(then, ChronoUnit.MINUTES) % 60 + " minutes");
         millis = time.until(then, ChronoUnit.MILLIS);
 
-        TaskBuilder.builder()
+        if(task != null)
+            task.closeSilently();
+
+        task = TaskBuilder.builder()
                 .async()
                 .after(millis, TimeUnit.MILLISECONDS)
                 .task(new TimerTask() {

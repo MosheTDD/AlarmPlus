@@ -1,17 +1,18 @@
-package me.moshe.lifeessentials;
+package me.moshe.alarmplus;
 
-import me.moshe.lifeessentials.alarmplus.AlarmPlus;
+import me.moshe.alarmplus.ui.Interface;
 
 import java.io.File;
 
 public class Main {
     public static SettingsYamlFile settings;
+    private static Interface inf = new Interface();
 
     public static void main(String[] args) {
         settings = new SettingsYamlFile("settings", new File("./"));
         settings.setup();
 
-        AlarmPlus alarmPlus = new AlarmPlus();
-        alarmPlus.start();
+        AlarmPlus.start();
+        inf.start(args);
     }
 }
